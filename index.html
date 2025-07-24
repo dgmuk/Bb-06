@@ -1,1 +1,341 @@
-1
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анкета: Формат тренировок и оборудование</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Исправление для Google Sites */
+        html, body {
+            height: auto !important;
+            min-height: 1px !important;
+            overflow: visible !important; 
+        }
+
+        /* Анимация для плавного появления блоков */
+        .fade-in-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стилизация инпутов, селектов, текстовых полей */
+        .form-input, .form-select, .form-textarea {
+            background-color: #374151; border: 1px solid #4b5563;
+            border-radius: 0.5rem; padding: 0.75rem 1rem; width: 100%;
+            color: #d1d5db; transition: all 0.2s;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none; border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Стилизация чекбоксов и радио-кнопок */
+        .form-checkbox, .form-radio {
+            appearance: none; -webkit-appearance: none;
+            width: 1.5rem; height: 1.5rem;
+            border: 2px solid #4b5563;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        .form-radio {
+            border-radius: 50%;
+        }
+        .form-checkbox:checked, .form-radio:checked {
+            background-color: #3b82f6; /* blue-500 */
+            border-color: #3b82f6;
+        }
+        .form-checkbox:checked::after {
+             content: '✓';
+             color: white;
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             font-size: 1rem;
+             font-weight: bold;
+        }
+        .form-radio:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.75rem; height: 0.75rem;
+            background-color: white;
+            border-radius: 50%;
+        }
+        .form-radio:checked ~ span, .form-checkbox:checked ~ span {
+            color: #60a5fa; /* blue-400 */
+        }
+        
+        /* Анимация мерцания для кнопок */
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-150%);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-150%); }
+            50% { transform: translateX(250%); }
+            100% { transform: translateX(250%); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <div id="main-container" class="container mx-auto max-w-3xl p-4 sm:p-8">
+        
+        <header class="text-center mb-10 fade-in-item">
+            <h1 class="text-3xl sm:text-4xl font-black text-white leading-tight">
+                Анкета: Формат тренировок и оборудование
+            </h1>
+        </header>
+        
+        <form id="trainingForm" class="space-y-8">
+            
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 100ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">1. Где тебе удобнее тренироваться?</h2>
+                <p class="text-sm text-gray-400 mb-4">Можно выбрать несколько вариантов</p>
+                <div class="space-y-3" id="training-location">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="location" value="Дома" class="form-checkbox mr-3"><span class="transition-colors">🏠 Дома</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="location" value="В тренажёрном зале" class="form-checkbox mr-3"><span class="transition-colors">🏋️‍♀️ В тренажёрном зале</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="location" value="Гибридно (дома и зал)" class="form-checkbox mr-3"><span class="transition-colors">🔁 Гибридно (дома и зал)</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="location" value="Пока не знаю / не определился" class="form-checkbox mr-3"><span class="transition-colors">🚫 Пока не знаю / не определился</span></label>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 200ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">2. Сколько времени в среднем ты можешь выделять на тренировку?</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_time" value="15–20 минут" class="form-radio mr-3"><span class="transition-colors">⏱ 15–20 минут</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_time" value="30 минут" class="form-radio mr-3"><span class="transition-colors">⏱ 30 минут</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_time" value="45 минут" class="form-radio mr-3"><span class="transition-colors">⏱ 45 минут</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_time" value="60 минут и более" class="form-radio mr-3"><span class="transition-colors">⏱ 60 минут и более</span></label>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 300ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">3. Сколько раз в неделю ты готов тренироваться?</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_frequency" value="2 раза" class="form-radio mr-3"><span class="transition-colors">🗓 2 раза</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_frequency" value="3 раза" class="form-radio mr-3"><span class="transition-colors">🗓 3 раза</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_frequency" value="4–5 раз" class="form-radio mr-3"><span class="transition-colors">🗓 4–5 раз</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_frequency" value="Каждый день" class="form-radio mr-3"><span class="transition-colors">🗓 Каждый день</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="training_frequency" value="Пока не знаю" class="form-radio mr-3"><span class="transition-colors">❓ Пока не знаю</span></label>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 400ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">4. Есть ли у тебя опыт тренировок ранее?</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="experience" value="Да, я раньше регулярно занимался" class="form-radio mr-3"><span class="transition-colors">✅ Да, я раньше регулярно занимался</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="experience" value="Были попытки, но без системы" class="form-radio mr-3"><span class="transition-colors">🔄 Были попытки, но без системы</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="experience" value="Нет, я новичок" class="form-radio mr-3"><span class="transition-colors">❌ Нет, я новичок</span></label>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 500ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">5. Что у тебя есть из оборудования дома?</h2>
+                <p class="text-sm text-gray-400 mb-4">Отметь всё, что есть</p>
+                <div class="space-y-3" id="equipment-list">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Коврик" class="form-checkbox mr-3"><span class="transition-colors">✅ Коврик</span></label>
+                    <div class="flex items-center gap-3"><label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Гантели" class="form-checkbox mr-3"><span class="transition-colors">✅ Гантели</span></label><input type="text" id="dumbbells_weight" placeholder="указать вес" class="form-input flex-grow"></div>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Фитнес-резинки" class="form-checkbox mr-3"><span class="transition-colors">✅ Фитнес-резинки</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Петли TRX" class="form-checkbox mr-3"><span class="transition-colors">✅ Петли TRX</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Штанга или гири" class="form-checkbox mr-3"><span class="transition-colors">✅ Штанга или гири</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Скакалка" class="form-checkbox mr-3"><span class="transition-colors">✅ Скакалка</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Эспандер" class="form-checkbox mr-3"><span class="transition-colors">✅ Эспандер</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Фитбол / ролик для пресса" class="form-checkbox mr-3"><span class="transition-colors">✅ Фитбол / ролик для пресса</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="equipment" value="Ничего из этого" class="form-checkbox mr-3"><span class="transition-colors">❌ Ничего из этого</span></label>
+                    <div class="flex items-center gap-3"><label class="flex items-center"><span class="mr-3">📝</span><span>Другое:</span></label><input type="text" id="other_equipment" placeholder="уточни" class="form-input flex-grow"></div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 600ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">6. Есть ли у тебя ограничения по движению или боли?</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="limitations" value="Нет, чувствую себя хорошо" class="form-radio mr-3"><span class="transition-colors">🚫 Нет, чувствую себя хорошо</span></label>
+                    <div class="flex items-start gap-3"><label class="flex items-center cursor-pointer"><input type="radio" name="limitations" value="Да, есть" class="form-radio mr-3"><span class="transition-colors">⚠️ Да, есть</span></label><input type="text" id="limitations_details" placeholder="уточни: колени, спина и т.д." class="form-input flex-grow"></div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 700ms;">
+                <h2 class="text-2xl font-bold text-white mb-6">7. Какие форматы тренировок тебе больше по душе?</h2>
+                <p class="text-sm text-gray-400 mb-4">Отметь всё, что тебе ближе</p>
+                <div class="space-y-3" id="training-format">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="format" value="Спокойные, растяжка, мобилити" class="form-checkbox mr-3"><span class="transition-colors">🧘 Спокойные, растяжка, мобилити</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="format" value="Силовые тренировки" class="form-checkbox mr-3"><span class="transition-colors">🏋️ Силовые тренировки</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="format" value="Функциональные / кардио" class="form-checkbox mr-3"><span class="transition-colors">💦 Функциональные / кардио</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="format" value="Работа с весом собственного тела" class="form-checkbox mr-3"><span class="transition-colors">🤸‍♀️ Работа с весом собственного тела</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" name="format" value="Разнообразие и чередование" class="form-checkbox mr-3"><span class="transition-colors">🧠 Разнообразие и чередование</span></label>
+                </div>
+            </div>
+        </form>
+        
+        <!-- Кнопка -->
+        <div class="mt-10 text-center fade-in-item" style="animation-delay: 800ms;">
+            <button id="copy-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500/50 shimmer-btn">
+                Скопировать ответы для тренера
+            </button>
+        </div>
+        
+        <!-- Подвал -->
+        <footer class="text-center mt-12 border-t border-gray-700 pt-6">
+            <p class="text-sm text-gray-500">&copy; 2025 г. Все права защищены. Специально для проекта Body balance.</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const copyButton = document.getElementById('copy-btn');
+            const form = document.getElementById('trainingForm');
+            const allInputs = () => form.querySelectorAll('input, select, textarea');
+            const STORAGE_KEY = 'trainingQuestionnaireState';
+
+            // --- Сохранение и загрузка ---
+            function saveState() {
+                const state = {};
+                allInputs().forEach(input => {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        state[input.id || input.name + input.value] = input.checked;
+                    } else {
+                        state[input.id] = input.value;
+                    }
+                });
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+
+            function loadState() {
+                const savedState = localStorage.getItem(STORAGE_KEY);
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    allInputs().forEach(input => {
+                        const key = input.id || input.name + input.value;
+                        if (state[key] !== undefined) {
+                            if (input.type === 'checkbox' || input.type === 'radio') {
+                                input.checked = state[key];
+                            } else {
+                                input.value = state[key];
+                            }
+                        }
+                    });
+                }
+            }
+
+            allInputs().forEach(input => {
+                input.addEventListener('change', saveState);
+                input.addEventListener('input', saveState);
+            });
+
+            // --- Копирование ---
+            copyButton.addEventListener('click', () => {
+                let reportText = "📝 Анкета: Формат тренировок и оборудование\n\n";
+
+                const getRadioAnswer = (name) => {
+                    const checked = document.querySelector(`input[name="${name}"]:checked`);
+                    return checked ? checked.value : "Нет ответа";
+                };
+
+                const getCheckboxAnswers = (containerId) => {
+                    const container = document.getElementById(containerId);
+                    const checked = container.querySelectorAll('input[type="checkbox"]:checked');
+                    if (checked.length === 0) return "Нет ответа";
+                    return Array.from(checked).map(cb => {
+                        let text = cb.value;
+                        if (cb.value === 'Гантели') {
+                            const weight = document.getElementById('dumbbells_weight').value.trim();
+                            if (weight) text += ` (${weight})`;
+                        }
+                        return text;
+                    }).join(', ');
+                };
+                
+                const getOtherEquipment = () => document.getElementById('other_equipment').value.trim();
+                const getLimitationsDetails = () => document.getElementById('limitations_details').value.trim();
+
+                reportText += `1. Где удобнее тренироваться: ${getCheckboxAnswers('training-location')}\n`;
+                reportText += `2. Время на тренировку: ${getRadioAnswer('training_time')}\n`;
+                reportText += `3. Сколько раз в неделю: ${getRadioAnswer('training_frequency')}\n`;
+                reportText += `4. Опыт тренировок: ${getRadioAnswer('experience')}\n`;
+                reportText += `5. Оборудование дома: ${getCheckboxAnswers('equipment-list')}`;
+                const otherEq = getOtherEquipment();
+                if (otherEq) reportText += `, Другое: ${otherEq}`;
+                reportText += `\n`;
+                
+                let limitations = getRadioAnswer('limitations');
+                if (limitations === 'Да, есть') {
+                    const details = getLimitationsDetails();
+                    if (details) limitations += ` (${details})`;
+                }
+                reportText += `6. Ограничения или боли: ${limitations}\n`;
+                reportText += `7. Предпочтительные форматы: ${getCheckboxAnswers('training-format')}\n`;
+
+                const tempTextarea = document.createElement('textarea');
+                tempTextarea.value = reportText;
+                tempTextarea.style.position = 'absolute';
+                tempTextarea.style.left = '-9999px';
+                document.body.appendChild(tempTextarea);
+                
+                tempTextarea.select();
+                tempTextarea.setSelectionRange(0, 99999); 
+
+                try {
+                    document.execCommand('copy');
+                    copyButton.textContent = '✅ Скопировано!';
+                } catch (err) {
+                    copyButton.textContent = 'Ошибка!';
+                    console.error('Ошибка копирования: ', err);
+                }
+                
+                document.body.removeChild(tempTextarea);
+
+                setTimeout(() => {
+                    copyButton.textContent = 'Скопировать ответы для тренера';
+                }, 2500);
+            });
+
+            // --- Исправление высоты для Google Sites ---
+            if ('ResizeObserver' in window) {
+                const observer = new ResizeObserver(entries => {
+                    if (entries.length > 0) {
+                        const height = entries[0].target.scrollHeight;
+                        document.body.style.height = height + 'px';
+                        document.documentElement.style.height = height + 'px';
+                    }
+                });
+                if (container) observer.observe(container);
+            }
+            
+            loadState();
+        });
+    </script>
+</body>
+</html>
